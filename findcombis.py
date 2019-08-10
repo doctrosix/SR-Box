@@ -81,13 +81,13 @@ cmd='''/silent-command
         end
       end
     end
-
   end
 '''
 
 srcclient = factorio_rcon.RCONClient(srchost, int(srcport), srcpass)
 contents = srcclient.send_command(cmd)
-print(contents)
+#print(contents)
+print(str(srvid) + ' ')
 
 with open(srvid + '.combis', 'w') as f:
   f.write(contents or '')

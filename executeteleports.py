@@ -2,7 +2,9 @@
 
 import glob
 import subprocess
+import time
 
+procs = []
 for f in glob.glob('*.combis'):
   srcid = f.replace('.combis','')
   with open(f) as srctps:
@@ -20,5 +22,13 @@ for f in glob.glob('*.combis'):
               dstx = d[5]
               dsty = d[6]
               cmd = ['python3','teleportchest.py', srcid, srcx, srcy, dstsrvid, dstx, dsty]
-              print(cmd)
-              print(subprocess.check_output(cmd))
+              procs.append(subprocess.Popen(cmd))
+
+while procs:
+  for p in procs:
+    try:
+      p.wait(.1)
+      procs.remove(p)
+    except subprocess.TimeoutExpired:
+      pass
+    

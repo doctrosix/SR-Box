@@ -79,7 +79,7 @@ cmd='''/silent-command
 
 srcclient = factorio_rcon.RCONClient(srchost, int(srcport), srcpass)
 contents = srcclient.send_command(cmd)
-print(contents)
+#print(contents)
 
 if contents != 'empty':
   cmd='''/silent-command 
@@ -98,7 +98,7 @@ if contents != 'empty':
   '''
   dstclient = factorio_rcon.RCONClient(dsthost, int(dstport), dstpass)
   result = dstclient.send_command(cmd)
-  print(result)
+  #print(result)
 
   if result == 'ok':
     cmd='''/silent-command 
@@ -108,4 +108,4 @@ if contents != 'empty':
       rcon.print('deleted')
     '''
     res = srcclient.send_command(cmd)
-    print(res)
+    #print(res)
