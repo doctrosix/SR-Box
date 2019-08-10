@@ -1,6 +1,7 @@
 Welcome to SR-Box
+Send-Recieve-Box controller
 
-this acts as a factorio game server controller that teleports chest contents from one server to another
+This acts as a factorio game server controller that teleports chest contents from one server to another
 
 You need a minimum of 3 computers (or VMs) to make this work.
 one SR-Box controller, and two (or more) game servers.
