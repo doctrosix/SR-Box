@@ -1,4 +1,11 @@
-Welcome to teleporting chests
+Welcome to SR-Box
+
+this acts as a factorio game server controller that teleports chest contents from one server to another
+
+You need a minimum of 3 computers (or VMs) to make this work.
+one SR-Box controller, and two (or more) game servers.
+We're still working out the limits of how much material, and servers a single controller can handle.
+
 
 1. `git clone https://github.com/doctrosix/SR-Box`
 2. Copy `server.list.example` to `server.list` and update with your server RCON parameters. Assign each server in your teleport network a unique integer ID
