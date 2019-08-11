@@ -1,3 +1,4 @@
 *.swp
 *.combis
 *.list
+__pycache__
