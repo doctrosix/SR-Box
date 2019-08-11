@@ -2,7 +2,7 @@
 import factorio_rcon
 import os
 
-def tp(srcsrvid, srcx, srcy, dstsrvid, dstx, dsty):
+def tp(srcsrvid, srcx, srcy, dstsrvid, dstx, dsty, srcconn, dstconn):
   srchost = None
   srcport = None
   srcpass = None
@@ -70,7 +70,11 @@ def tp(srcsrvid, srcx, srcy, dstsrvid, dstx, dsty):
 
   '''
 
-  srcclient = factorio_rcon.RCONClient(srchost, int(srcport), srcpass)
+  if srcconn[0]:
+    srcclient = srcconn[0]
+  else:
+    srcclient = factorio_rcon.RCONClient(srchost, int(srcport), srcpass, timeout=5)
+    srcconn[0] = srcclient
   contents = srcclient.send_command(cmd)
   summary = contents
 
@@ -89,7 +93,12 @@ def tp(srcsrvid, srcx, srcy, dstsrvid, dstx, dsty):
           rcon.print('nofit')
         end
     '''
-    dstclient = factorio_rcon.RCONClient(dsthost, int(dstport), dstpass)
+
+    if dstconn[0]:
+      dstclient = dstconn[0]
+    else:
+      dstclient = factorio_rcon.RCONClient(dsthost, int(dstport), dstpass, timeout=5) 
+      dstconn[0] = dstclient
     result = dstclient.send_command(cmd)
     summary = summary + ' ' + result 
 

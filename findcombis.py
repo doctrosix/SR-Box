@@ -65,7 +65,7 @@ cmd='''/silent-command
             elseif #wchest > 0 then
               cpos = wpos
             end
-           
+
             if cpos then 
               if s.signal.name == 'signal-R' then
                 rcon.print('R'.. ' ' .. pos .. ' ' .. ival .. ' ' .. 
@@ -84,10 +84,10 @@ cmd='''/silent-command
   end
 '''
 
-srcclient = factorio_rcon.RCONClient(srchost, int(srcport), srcpass)
+srcclient = factorio_rcon.RCONClient(srchost, int(srcport), srcpass, timeout=5)
 contents = srcclient.send_command(cmd)
+print(str(srvid))
 #print(contents)
-print(str(srvid) + ' ')
 
 with open(srvid + '.combis', 'w') as f:
   f.write(contents or '')
