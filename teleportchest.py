@@ -51,8 +51,8 @@ def tp(srcsrvid, srcx, srcy, dstsrvid, dstx, dsty):
       end
 
       surface = game.get_surface(1)
-      fef=surface.find_entities_filtered
-      src=fef({ position={''' + srcx + ''', ''' + srcy + '''}, radius=.1, name='steel-chest'})[1]
+      fef=surface.find_entity
+      src=fef('steel-chest', {''' + srcx + ''', ''' + srcy + '''})
       inv = src.get_inventory(defines.inventory.chest)
       contents = {}
       if inv.is_empty() then 
@@ -72,13 +72,13 @@ def tp(srcsrvid, srcx, srcy, dstsrvid, dstx, dsty):
 
   srcclient = factorio_rcon.RCONClient(srchost, int(srcport), srcpass)
   contents = srcclient.send_command(cmd)
-  #print(contents)
+  summary = contents
 
   if contents != 'empty':
     cmd='''/silent-command 
         surface = game.get_surface(1)
-        fef=surface.find_entities_filtered
-        dst=fef({ position={''' + dstx + ''', ''' + dsty + '''}, radius=.1, name='steel-chest'})[1]
+        fef=surface.find_entity
+        dst=fef('steel-chest', {''' + dstx + ''', ''' + dsty + '''})
 
         contents = ''' + contents + '''
 
@@ -91,17 +91,19 @@ def tp(srcsrvid, srcx, srcy, dstsrvid, dstx, dsty):
     '''
     dstclient = factorio_rcon.RCONClient(dsthost, int(dstport), dstpass)
     result = dstclient.send_command(cmd)
-    #print(result)
+    summary = summary + ' ' + result 
 
     if result == 'ok':
       cmd='''/silent-command 
         contents = ''' + contents + '''
-        src=fef({ position={''' + srcx + ''', ''' + srcy + '''}, radius=.1, name='steel-chest'})[1]
+        fef=surface.find_entity
+        src=fef('steel-chest', {''' + srcx + ''', ''' + srcy + '''})
         src.get_inventory(defines.inventory.chest).remove(contents)
         rcon.print('deleted')
       '''
       res = srcclient.send_command(cmd)
-      #print(res)
+      summary = summary + ' ' + res
+      print(summary)
 
 if __name__ == '__main__':
   srcsrvid = os.sys.argv[1]
