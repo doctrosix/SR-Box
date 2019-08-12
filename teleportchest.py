@@ -36,7 +36,7 @@ def tp(srcsrvid, srcx, srcy, dstsrvid, dstx, dsty, srcconn, dstconn):
     if not dsthost or not dstport or not dstpass:
       exit(-1)
 
-    cmd='''/silent-command
+    cmd='''/silent-command 
         surface = game.get_surface(1)
         fef=surface.find_entity
         dst=fef('steel-chest', {''' + dstx + ''', ''' + dsty + '''})
@@ -58,8 +58,9 @@ def tp(srcsrvid, srcx, srcy, dstsrvid, dstx, dsty, srcconn, dstconn):
       dstconn[0] = dstclient
 
     availableslots = dstclient.send_command(cmd)
+    #print(availableslots)
 
-    cmd='''/silent-command
+    cmd='''/silent-command 
 
         function serialize_table(t)
           s='{'
@@ -105,11 +106,12 @@ def tp(srcsrvid, srcx, srcy, dstsrvid, dstx, dsty, srcconn, dstconn):
       srcclient = factorio_rcon.RCONClient(srchost, int(srcport), srcpass, timeout=5)
       srcconn[0] = srcclient
     rsp = srcclient.send_command(cmd) or ''
+    #print(rsp)
 
     contents = '{' + ','.join(rsp.split('\n')) + '}'
 
     if contents != '[empty]':
-      cmd='''/silent-command
+      cmd='''/silent-command 
           surface = game.get_surface(1)
           fef=surface.find_entity
           dst=fef('steel-chest', {''' + dstx + ''', ''' + dsty + '''})
@@ -132,9 +134,10 @@ def tp(srcsrvid, srcx, srcy, dstsrvid, dstx, dsty, srcconn, dstconn):
         dstclient = factorio_rcon.RCONClient(dsthost, int(dstport), dstpass, timeout=5)
         dstconn[0] = dstclient
       result = dstclient.send_command(cmd) or ''
+      #print(result)
       transferstatus = '{' + ','.join(result.split('\n')) + '}'
 
-      cmd='''/silent-command
+      cmd='''/silent-command 
         fef=surface.find_entity
         src=fef('steel-chest', {''' + srcx + ''', ''' + srcy + '''})
         contents = ''' + contents + '''
@@ -146,6 +149,7 @@ def tp(srcsrvid, srcx, srcy, dstsrvid, dstx, dsty, srcconn, dstconn):
         end
       '''
       res = srcclient.send_command(cmd)
+      #print(res)
   except Exception as e:
     print('EXCEPTION DURING TELEPORT')
     print(e)
