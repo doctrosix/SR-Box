@@ -10,13 +10,20 @@ one SR-Box controller, and two (or more) game servers.
 We're still working out the limits of how much material, and servers a single controller can handle.
 
 Goals: create Cross-server teleport chests without any player mods necessary.
+
 Inspiration: Clusterio, Gridlock
+
 Thanks to: The Python RCON library guy.
 
+
 Credits:
+
     Buddy Moore         Coding
+    
     Truman Kilen        Sysadmin
+    
     Mario Hernandez     Sysadmin
+    
 
 1. `git clone https://github.com/doctrosix/SR-Box.git`
 2. Copy `server.list.example` to `server.list` and update with your server RCON parameters. Assign each server in your teleport network a unique integer ID
@@ -28,7 +35,9 @@ Credits:
 7. Profit.
 
 Next steps:
-    -Optimize code for less reconnects
-    -Burn testing to find rough mass-teleport limits
-    -cross-server transaction confirmation
-    -Add security, and SSH tunnels. all RCON traffic is currently plain text.
+
+    -[ ] Optimize code for less reconnects
+    -[ ] Burn testing to find rough mass-teleport limits
+    -[ ] cross-server transaction confirmation
+    -[ ] Add security, and SSH tunnels. all RCON traffic is currently plain text.
+    
